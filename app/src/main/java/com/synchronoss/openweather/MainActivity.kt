@@ -71,10 +71,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
                 }
 
-                handler.postDelayed(this, 10000)//
+                handler.postDelayed(this, 7200000)//
             }
         }
-        handler.postDelayed(runnable, 10000)
+        handler.postDelayed(runnable, 7200000)
 
     }
 
