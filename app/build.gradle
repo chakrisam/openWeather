@@ -34,6 +34,9 @@ android {
         enabled = true
     }
 }
+def rxJavaVersion = '2.1.1'
+def retrofitVersion = '2.5.0'
+def workMangerVersion = '2.5.0'
 
 dependencies {
 
@@ -44,11 +47,20 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
 
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
 
     implementation 'com.google.android.gms:play-services-location:18.0.0'
 
+    //DataBinding Libs
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxJavaVersion"
+
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+
+    implementation "androidx.work:work-runtime:$workMangerVersion"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

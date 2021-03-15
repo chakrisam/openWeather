@@ -1,15 +1,31 @@
 package com.synchronoss.openweather.api
 
+import android.content.Context
 import com.synchronoss.openweather.model.WeatherResponse
-import retrofit2.Call
-import retrofit2.http.GET
+import io.reactivex.Single
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Query
 
-interface ApiService {
-    @GET("data/2.5/weather?")
-    fun getCurrentWeatherData(
+class ApiService(context: Context) {
+
+    private val BASE_URL = "http://api.openweathermap.org/"
+
+
+    private val api = Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        .build()
+        .create(ApiInterface::class.java)
+
+
+    fun getWeatherData(
         @Query("lat") lat: String?,
         @Query("lon") lon: String?,
         @Query("APPID") app_id: String?
-    ): Call<WeatherResponse?>?
+    ): Single<WeatherResponse> {
+        return api.getCurrentWeatherData(lat, lon, app_id)
+    }
 }
